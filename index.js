@@ -9,7 +9,9 @@ let app = express();
 app.set('view engine', 'hbs');
 
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+    extended: false
+}));
 
 wax.on(hbs.handlebars);
 wax.setLayoutPath('./views/layouts');
@@ -19,6 +21,8 @@ const landingRoutes = require('./routes/landing');
 
 async function main() {
     app.get('/', landingRoutes);
+    app.get('/about', landingRoutes);
+    app.get('/contact', landingRoutes);
 };
 main();
 
