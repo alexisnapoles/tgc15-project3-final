@@ -14,15 +14,16 @@ app.use(express.urlencoded({ extended: false }));
 wax.on(hbs.handlebars);
 wax.setLayoutPath('./views/layouts');
 
+// importing the routes
+const landingRoutes = require('./routes/landing');
+
 async function main() {
-    app.get('/', (req, res) => {
-        res.send('HA HA HA! Restart pt2 now you use template. Awesome job, reading properly! Keep going!')
-    });
+    app.get('/', landingRoutes);
 };
 main();
 
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-    console.log('Aye! Aye! Database has commenced!');
+    console.log(`Aye! Aye! Database has commenced in the best port, i love you ${PORT}!`);
 });
