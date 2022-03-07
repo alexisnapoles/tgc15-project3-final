@@ -1,0 +1,8 @@
+{
+    "dev": {
+        "driver": {"ENV": "DB_DRIVER"},
+        "user": {"ENV": "DB_USER"},
+        "password": {"ENV": "DB_PASS"},
+        "database": {"ENV": "DB_DB"}
+    }
+}
