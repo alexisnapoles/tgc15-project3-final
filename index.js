@@ -18,11 +18,16 @@ wax.setLayoutPath('./views/layouts');
 
 // importing the routes
 const landingRoutes = require('./routes/landing');
+const serviceRoutes = require('./routes/services');
 
 async function main() {
-    app.get('/', landingRoutes);
+    // landing endpoint routes
+    app.use('/', landingRoutes);
     app.get('/about', landingRoutes);
     app.get('/contact', landingRoutes);
+
+    // services routes
+    app.use('/services', serviceRoutes);
 };
 main();
 

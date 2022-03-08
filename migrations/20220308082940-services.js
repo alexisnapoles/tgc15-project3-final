@@ -23,39 +23,25 @@ exports.up = function(db) {
       autoIncrement: true,
       unsigned: true,
     },
-    service_specifications_id: {
-      type: 'int',
-      unsigned: true,
-      notNull: true, 
-      foreignKey: {
-        name:'service_specifications_id_fk',
-        table: 'services',
-        rules: {
-          onDelete: 'CASCADE',
-          onUpdate: 'RESTRICT'
-        },
-        mapping: 'id'
-      }
-    },
-    thumbnail: {
+    name: {
       type: 'string',
-      length: 100,
+      notNull: true,
+      length: 100
+    },
+    cost_per_hour: {
+      type: 'int',
       notNull: true
     },
     min_hours: {
       type: 'int',
       notNull: true
     },
-    rating: {
-      type: 'decimal',
-    },
     description: {
       type: 'text',
       length: 100
     },
-    cost_per_hour: {
-      type: 'int',
-      notNull: true
+    rating: {
+      type: 'decimal',
     },
     date_of_posting: {
       type: 'datetime'

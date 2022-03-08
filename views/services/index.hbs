@@ -1,0 +1,47 @@
+{{#extends "base"}}
+  {{#block "content"}}
+    <div class="container" style="border: 0.5em;">
+      {{!-- {{#each services}} --}}
+      <div class="row row-cols-2">
+        <div class="col">
+          <p>insert image</p>
+        </div>
+        <div class="col">
+          <div class="row">
+            <h5>Name: {{this.name}}</h5>
+            <small>
+              ID:
+              {{this.id}}
+              <br />
+              Category:
+              {{this.services.category_id}}
+            </small>
+            <hr />
+            <small>Desc: {{this.description}}</small>
+            <small>Rating: {{this.rating}}</small>
+            <hr />
+            <h5>Cost: {{this.cost_per_hour}}</h5>
+            <hr />
+            <small>Req. hrs (min): {{this.min_hours}}</small>
+            <hr />
+            <small>Secification Options:
+              {{this.services.service_specs_id}}</small>
+            <hr />
+            <small>Date of Posting: {{this.date_of_posting}}</small>
+            <hr />
+            <div class="col">
+              <button type="submit" class="btn btn-success"> Add to Cart </button>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-info"> Edit </button>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-danger"> Delete </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{!-- {{/each}} --}}
+    </div>
+  {{/block}}
+{{/extends}}
