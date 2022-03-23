@@ -23,8 +23,6 @@ const serviceRoutes = require('./routes/services');
 async function main() {
     // landing endpoint routes
     app.use('/', landingRoutes);
-    app.get('/about', landingRoutes);
-    app.get('/contact', landingRoutes);
 
     // services routes
     app.use('/services', serviceRoutes);

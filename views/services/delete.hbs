@@ -1,0 +1,15 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+    <h3>Deleting Service: {{services.name}}</h3>
+
+    <form method="POST">
+        <div class="alert alert-danger">
+            <p>Deleting the service will be permanent. Are you sure you want to remove {{services.name}}</p>
+            <input type="submit" value="Delete Permanently"/>
+            <a href="/services" class="btn btn-success"></a>
+        </div>
+    </form>
+
+{{/block}}
+{{/extends}}

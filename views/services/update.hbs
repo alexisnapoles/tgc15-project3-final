@@ -1,0 +1,12 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+    <h3>Updating Service {{service.name}}</h3>
+    <form method="POST">
+        {{{form}}}
+        
+        <input type="submit" value="Update" class="btn btn-primmary mt-3"/>
+    </form>
+
+{{/block}}
+{{/extends}}

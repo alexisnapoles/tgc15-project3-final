@@ -2,6 +2,7 @@ const forms = require("forms");
 
 const fields = forms.fields;
 const validators = forms.validators;
+const widgets = forms.widgets;
 
 var bootstrapField = function(name, object) {
     if (!Array.isArray(object.widget.classes)) {
@@ -24,59 +25,70 @@ var bootstrapField = function(name, object) {
     return '<div class="form-group">' + label + widget + error + '</div>';
 };
 
-const createServiceForm = () => {
+const createServiceForm = (categories, specifications) => {
     return forms.create({
         'name': fields.string({
             required: true,
             errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
         }),
-        'cost_per_hour': fields.string({
+        'category_id': fields.string({
+            label: 'Category',
             required: true,
             errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
-        }),
-        'min_hours': fields.string({
-            required: true,
-            errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
+            widget: widgets.select(),
+            choices: categories
         }),
         'description': fields.string({
             required: true,
             errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
         }),
-        'rating': fields.string({
+        'rating': fields.number({
             required: true,
             errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
+            validators: [validators.integer(), validators.min(0)]
         }),
-        'date_of_posting': fields.string({
+        'cost_per_hour': fields.number({
             required: true,
             errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
+            validators: [validators.integer(), validators.min(0)]
         }),
-        'thumbnail': fields.string({
+        'min_hours': fields.number({
             required: true,
             errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
+            validators: [validators.integer(), validators.min(0)]
         }),
-        
+        'date_of_posting': fields.date({
+            required: true,
+            errorAfterField: true,
+        }),   
     })
 };
 
-module.exports = { bootstrapField, createServiceForm }
+const createSearchForm = function(allCategories) {
+    return forms.create({
+        'name': fields.string({
+            required: false
+        }),
+        'rating': fields.number({
+            required: false,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'cost_per_hour': fields.number({
+            required: false,
+            errorAfterField: true,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'category_id': fields.string({
+            label: 'Category',
+            required: false,
+            widget: widgets.select(),
+            choices: allCategories
+        })
+    })
+}
+
+module.exports = { 
+    bootstrapField, 
+    createServiceForm,
+    createSearchForm
+}
