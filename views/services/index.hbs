@@ -15,23 +15,21 @@
           </div>
           <div class="col">
             <div class="row">
-              <h5>Name: </h5> <h5>{{this.name}}</h5>
-              <small>
-                ID: <small>{{this.id}}</small>
-                <br />
-                Category: <small>{{this.services.category_id}}</small>
-              </small>
+              <h5>Name: {{this.name}}</h5>
+              <small>ID: {{this.id}}</small>
+              <br />
+              <small>Category: {{this.category.name}}</small>
               <hr />
-              <small>Desc: </small>  <small>{{this.description}}</small>
-              <small>Rating:</small> <small>{{this.rating}}</small>
+              <small>Desc: {{this.description}}</small>
+              <small>Rating: {{this.rating}}</small>
               <hr />
-              <h5>Cost:</h5> <h5>{{this.cost_per_hour}}</h5>
+              <h5>Cost: Php {{this.cost_per_hour}}.00</h5>
               <hr />
-              <small>Req. hrs (min):</small> <small>{{this.min_hours}}</small>
+              <small>Req. hrs (min): {{this.min_hours}}</small>
               <hr />
-              <small>Secification Options:</small> <small>{{this.services.service_specs_id}}</small>
+              <small>Secification Options: {{this.services.service_specs_id}}</small>
               <hr />
-              <small>Date of Posting:</small> <small>{{this.date_of_posting}}</small>
+              <small>Date of Posting: {{this.date_of_posting}}</small>
               <hr />
               <div class="col">
                 <a href="/cart/{{this.id}}/add" type="submit" class="btn btn-success"> Add to Cart </a>
@@ -46,6 +44,7 @@
           </div>
         </div>
       {{/each}}
+      
     </div>
 
   {{/block}}

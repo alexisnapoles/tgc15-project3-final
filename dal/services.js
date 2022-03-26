@@ -1,26 +1,27 @@
-const {Service, Category} = require('../models')
+const {
+    Service,
+    Category
+} = require('../models')
 
 async function getServiceById(serviceId) {
     const service = await Service.where({
         'id': serviceId
     }).fetch({
         'require': false,
-        withRelated: ['categories']
+        withRelated: ['category']
     });
-    return product;
+    return service;
 }
 
 async function getAllCategories() {
     const allCategories = await Category.fetchAll().map((category) => {
-        return [ category.get('id'), category.get('name') ]
+        return [category.get('id'), category.get('name')]
     });
     return allCategories;
 }
 
-
 async function createService(serviceData) {
     const newService = new Service();
-
     newService.set('name', serviceData.name);
     newService.set('category_id', serviceData.category_id);
     newService.set('cost_per_hour', serviceData.cost_per_hour);
