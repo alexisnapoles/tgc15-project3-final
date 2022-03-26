@@ -100,52 +100,39 @@ router.get('/:service_id/update', async (req, res) => {
 
     const serviceForm = createServiceForm(allCategories);
     serviceForm.fields.name.value = service.get('name');
+    serviceForm.fields.category_id.value = service.get('category_id');
     serviceForm.fields.cost_per_hour.value = service.get('cost_per_hour');
     serviceForm.fields.min_hours.value = service.get('min_hours');
     serviceForm.fields.description.value = service.get('description');
     serviceForm.fields.rating.value = service.get('rating');
 
-    const selectedCategory = await service.related('categories').pluck('id');
-    serviceForm.fields.category_id.value = selectedCategory
+    // const selectedCategory = await service.related('categories').pluck('id');
+    // serviceForm.fields.category_id.value = selectedCategory
 
-    res.render('products/update', {
+    res.render('services/update', {
         'form': serviceForm.toHTML(bootstrapField),
         'service': service.toJSON()
     })
 });
 
 router.post('/:service_id/update', async (req, res) => {
-    const service = await serviceDataLayer.getServiceById(req.params.product_id);
+    const service = await serviceDataLayer.getServiceById(req.params.service_id);
     const allCategories = await serviceDataLayer.getAllCategories();
 
     const serviceForm = createSearchForm(allCategories);
     serviceForm.handle(req, {
         'success': async function (form) {
-            let {
-                categories,
-                ...serviceData
-            } = form.data;
+            service.set('name', form.data.name);
+            service.set('cost_per_hour', form.data.cost_per_hour);
+            service.set('description', form.data.description);
+            service.set('category_id', form.data.category_id);
 
-            service.set(serviceData);
             await service.save();
-
-            let categoryIds = tags.split(',');
-
-            let existingCategoryIds = await service.related('categories').pluck('id');
-            console.log("existingCategoryIds: ", existingCategoryIds);
-
-            let removeCategory = existingCategoryIds.filter(function (id) {
-                return categoryIds.includes(id) === false;
-            });
-            console.log("removing: ", removeCategory);
-
-            await service.tags().detach(removeCategory);
-            await service.tags().attach(categoryIds);
 
             res.redirect('/services');
         },
         'error': function () {
-
+            // alert(err);
         }
     })
 });
