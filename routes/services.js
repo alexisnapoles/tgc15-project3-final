@@ -51,8 +51,12 @@ router.get('/', async (req, res) => {
                 'services': services.toJSON(),
                 'searchForm': form.toHTML(bootstrapField)
             })
+        },
+        'error': async () => {
+            res.render('services/index')
         }
     })
+
 });
 
 router.get('/create', async (req, res) => {
@@ -78,7 +82,6 @@ router.post('/create', async (req, res) => {
 
             if (form.data.categories) {
                 let selectedCategory = form.data.categories.split(',');
-
                 await newService.tags().attach(selectedCategory);
             }
             res.redirect('/services');
@@ -124,7 +127,10 @@ router.post('/:service_id/update', async (req, res) => {
         'success': async function (form) {
             service.set('name', form.data.name);
             service.set('cost_per_hour', form.data.cost_per_hour);
+            service.set('min_hours', form.data.min_hours);
             service.set('description', form.data.description);
+            service.set('rating', form.data.rating);
+            service.set('date_of_posting', form.data.date_of_posting);
             service.set('category_id', form.data.category_id);
 
             await service.save();
@@ -132,7 +138,7 @@ router.post('/:service_id/update', async (req, res) => {
             res.redirect('/services');
         },
         'error': function () {
-            // alert(err);
+           
         }
     })
 });

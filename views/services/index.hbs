@@ -3,17 +3,20 @@
 
     <div class="container" style="border: 0.5em;">
 
-      <form  method="GET">
-          {{{searchForm}}}
-          <input type="submit" class="btn btn-primary mt-3" value="Search" />
-        </form>
+      <form method="get">
+        {{{searchForm}}}
+        <input type="submit" class="btn btn-primary mt-3" value="Search" />
+      </form>
 
+      <div class="container">
+        <a href="/services/create" class="btn btn-primary">Add a Service</a>
+      </div>
       {{#each services}}
-        <div class="row row-cols-2">
-          <div class="col">
+        <div class="row row-cols-2 my-5">
+          <div class="col card">
             <p>insert image</p>
           </div>
-          <div class="col">
+          <div class="col card">
             <div class="row">
               <h5>Name: {{this.name}}</h5>
               <small>ID: {{this.id}}</small>
@@ -27,24 +30,34 @@
               <hr />
               <small>Req. hrs (min): {{this.min_hours}}</small>
               <hr />
-              <small>Secification Options: {{this.services.service_specs_id}}</small>
-              <hr />
               <small>Date of Posting: {{this.date_of_posting}}</small>
               <hr />
               <div class="col">
-                <a href="/cart/{{this.id}}/add" type="submit" class="btn btn-success"> Add to Cart </a>
+                <a
+                  href="/cart/{{this.id}}/add"
+                  type="submit"
+                  class="btn btn-success"
+                > Add to Cart </a>
               </div>
               <div class="col">
-                <a href="/services/{{this.id}}/update" type="submit" class="btn btn-info"> Edit </a>
+                <a
+                  href="/services/{{this.id}}/update"
+                  type="submit"
+                  class="btn btn-info"
+                > Edit </a>
               </div>
               <div class="col">
-                <a href="/services/{{this.id}}/update" type="submit" class="btn btn-danger"> Delete </a>
+                <a
+                  href="/services/{{this.id}}/delete"
+                  type="submit"
+                  class="btn btn-danger"
+                > Delete </a>
               </div>
             </div>
           </div>
         </div>
       {{/each}}
-      
+
     </div>
 
   {{/block}}

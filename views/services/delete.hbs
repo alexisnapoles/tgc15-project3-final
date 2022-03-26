@@ -1,13 +1,13 @@
 {{#extends 'base'}}
 {{#block 'content'}}
 
-    <h3>Deleting Service: {{services.name}}</h3>
+    <h3>Deleting Service: {{service.name}}</h3>
 
     <form method="POST">
         <div class="alert alert-danger">
-            <p>Deleting the service will be permanent. Are you sure you want to remove {{services.name}}</p>
-            <input type="submit" value="Delete Permanently"/>
-            <a href="/services" class="btn btn-success"></a>
+            <p>Deleting the service will be permanent. Are you sure you want to remove {{service.name}}</p>
+            <input type="submit" class="btn btn-danger" value="Delete Permanently"/>
+            <a href="/services" class="btn btn-success">Cancel</a>
         </div>
     </form>
 

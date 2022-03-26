@@ -25,7 +25,7 @@ var bootstrapField = function(name, object) {
     return '<div class="form-group">' + label + widget + error + '</div>';
 };
 
-const createServiceForm = (categories, specifications) => {
+const createServiceForm = (categories) => {
     return forms.create({
         'name': fields.string({
             required: true,
@@ -67,22 +67,31 @@ const createServiceForm = (categories, specifications) => {
 const createSearchForm = function(allCategories) {
     return forms.create({
         'name': fields.string({
-            required: false
+            required: false,
+        }),
+        'cost_per_hour': fields.number({
+            required: false,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'min_hours': fields.number({
+            required: false,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'description': fields.string({
+            required: false,
         }),
         'rating': fields.number({
             required: false,
             validators: [validators.integer(), validators.min(0)]
         }),
-        'cost_per_hour': fields.number({
+        'date_of_posting': fields.date({
             required: false,
-            errorAfterField: true,
-            validators: [validators.integer(), validators.min(0)]
         }),
         'category_id': fields.string({
             label: 'Category',
             required: false,
             widget: widgets.select(),
-            choices: allCategories
+            choices: allCategories,
         })
     })
 }
