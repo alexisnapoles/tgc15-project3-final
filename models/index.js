@@ -14,4 +14,12 @@ const Category = bookshelf.model('Category', {
     }
 });
 
-module.exports = { Service, Category };
+const User = bookshelf.model('User', {
+    tableName: 'users'
+});
+
+module.exports = {
+    Service,
+    Category,
+    User
+};
