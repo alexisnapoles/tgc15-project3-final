@@ -58,7 +58,7 @@ const createServiceForm = (categories) => {
             validators: [validators.integer(), validators.min(0)]
         }),
         'date_of_posting': fields.date({
-            required: true,
+            required: false,
             errorAfterField: true,
         }),   
     })
@@ -68,24 +68,30 @@ const createSearchForm = function(allCategories) {
     return forms.create({
         'name': fields.string({
             required: false,
+            errorAfterField: true
         }),
         'cost_per_hour': fields.number({
             required: false,
+            errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
         'min_hours': fields.number({
             required: false,
+            errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
         'description': fields.string({
             required: false,
+            errorAfterField: true,
         }),
         'rating': fields.number({
             required: false,
+            errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
         'date_of_posting': fields.date({
             required: false,
+            errorAfterField: true,
         }),
         'category_id': fields.string({
             label: 'Category',
@@ -94,7 +100,7 @@ const createSearchForm = function(allCategories) {
             choices: allCategories,
         })
     })
-}
+};
 
 module.exports = { 
     bootstrapField, 

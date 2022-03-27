@@ -84,6 +84,7 @@ router.post('/create', async (req, res) => {
                 let selectedCategory = form.data.categories.split(',');
                 await newService.tags().attach(selectedCategory);
             }
+            req.flash('success_messages', 'New Service added')
             res.redirect('/services');
         },
         'error': async (form) => {
@@ -138,7 +139,7 @@ router.post('/:service_id/update', async (req, res) => {
             res.redirect('/services');
         },
         'error': function () {
-           
+
         }
     })
 });
