@@ -1,0 +1,23 @@
+{{#extends "base"}}
+  {{#block "content"}}
+
+    <h3>Hi {{user.username}} !</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>ID:</td>
+            <td>{{user.id}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/users/signout" class="btn btn-danger my-3">Sign out</a>
+
+  {{/block}}
+{{/extends}}

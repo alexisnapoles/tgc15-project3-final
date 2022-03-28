@@ -4,9 +4,9 @@ const fields = forms.fields;
 const validators = forms.validators;
 const widgets = forms.widgets;
 
-var bootstrapField = function(name, object) {
+var bootstrapField = function (name, object) {
     if (!Array.isArray(object.widget.classes)) {
-        object.widget.classes = []; 
+        object.widget.classes = [];
     }
 
     if (object.widget.classes.indexOf('form-control') === -1) {
@@ -57,14 +57,16 @@ const createServiceForm = (categories) => {
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
-        'date_of_posting': fields.date({
+        'date_of_posting': fields.string({
             required: false,
             errorAfterField: true,
-        }),   
+            widget: widgets.date(),
+            validators: [validators.date()]
+        }),
     })
 };
 
-const createSearchForm = function(allCategories) {
+const createSearchForm = function (allCategories) {
     return forms.create({
         'name': fields.string({
             required: false,
@@ -89,9 +91,10 @@ const createSearchForm = function(allCategories) {
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
-        'date_of_posting': fields.date({
+        'date_of_posting': fields.string({
             required: false,
             errorAfterField: true,
+            validators: [validators.date()]
         }),
         'category_id': fields.string({
             label: 'Category',
@@ -102,8 +105,55 @@ const createSearchForm = function(allCategories) {
     })
 };
 
-module.exports = { 
-    bootstrapField, 
+
+const createSignupForm = () => {
+    return forms.create({
+        'username': fields.string({
+            required: true,
+            errorAfterField: true
+        }),
+        'email': fields.string({
+            required: true,
+            errorAfterField: true
+        }),
+        'password': fields.string({
+            required: true,
+            errorAfterField: true,
+            widget: widgets.password()
+        }),
+        'confirm_password': fields.string({
+            required: true,
+            errorAfterField: true,
+            widget: widgets.password(),
+            validators: [validators.matchField('password')]
+        }),
+        'date_registered': fields.date({
+            required: true,
+            errorAfterField: true,
+            widget: widgets.date(),
+            validators: [validators.date()]
+        })
+    });
+};
+
+const createSigninForm = () => {
+    return forms.create({
+        'username': fields.string({
+            required: true,
+            errorAfterField: true
+        }),
+        'password': fields.string({
+            required: true,
+            errorAfterField: true,
+            widget: widgets.password()
+        })
+    });
+};
+
+module.exports = {
+    bootstrapField,
     createServiceForm,
-    createSearchForm
-}
+    createSearchForm,
+    createSignupForm,
+    createSigninForm
+};

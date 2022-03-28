@@ -11,6 +11,9 @@ const {
     createServiceForm,
     createSearchForm
 } = require('../forms');
+const {
+    checkAuthentication
+} = require('../middlewares');
 
 const serviceDataLayer = require('../dal/services');
 
@@ -59,7 +62,7 @@ router.get('/', async (req, res) => {
 
 });
 
-router.get('/create', async (req, res) => {
+router.get('/create', checkAuthentication, async (req, res) => {
 
     const allCategories = await serviceDataLayer.getAllCategories();
 
@@ -70,7 +73,7 @@ router.get('/create', async (req, res) => {
     });
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', checkAuthentication, async (req, res) => {
 
     const allCategories = await serviceDataLayer.getAllCategories();
 

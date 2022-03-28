@@ -82,41 +82,35 @@
           <hr class="d-md-none text-white-50" />
 
           <div class="navbar-nav flex-row flex-wrap ms-md-auto">
-            <div class="col-6 col-md-auto">
-              <a
-                class="btn btn-primary d-lg-inline-block my-2 my-md-0 ms-md-3"
-                href=""
-              >Sign in
-              </a>
-            </div>
-            <div class="col-6 col-md-auto">
-              <a
-                class="btn btn-success d-lg-inline-block my-2 my-md-0 ms-md-3"
-                href=""
-              >Sign out
-              </a>
-            </div>
+            {{#if users}}
+              Hi,
+              {{user.username}}
+              <div class="col-6 col-md-auto">
+                <a
+                  class="btn btn-success d-lg-inline-block my-2 my-md-0 ms-md-3"
+                  href="/users/signout"
+                >Sign out
+                </a>
+              </div>
+            {{else}}
+              <div class="col-6 col-md-auto">
+                <a
+                  class="btn btn-primary d-lg-inline-block my-2 my-md-0 ms-md-3"
+                  href="/users/signin"
+                >Sign in
+                </a>
+                <a
+                  class="btn btn-info d-lg-inline-block my-2 my-md-0 ms-md-3"
+                  href="/users/signup"
+                >Sign up
+                </a>
+              </div>
+            {{/if}}
           </div>
 
         </div>
       </nav>
-    </header>
-    {{! <nav class="bd-subnavbar py-2" aria-label="Secondary navigation">
-      <div class="container-xxl d-flex align-items-md-center">
-        <form  method="GET" class="bd-search position-relative me-auto">
-          
-          <input
-            type="search"
-            class="form-control"
-            id="search-input"
-            placeholder="Search..."
-            aria-label="Search for..."
-            autocomplete="off"
-            data-bd-docs-version="5.1"
-          />
-        </form>
-      </div>
-    </nav> }}
+    </header>>
 
     {{! CONTENT }}
     <div class="container">
@@ -125,7 +119,7 @@
           <div class="alert alert-success">
             {{this}}
           </div>
-        {{/each}}  
+        {{/each}}
       {{/if}}
 
       {{#if error_messages}}
@@ -135,7 +129,7 @@
           </div>
         {{/each}}
       {{/if}}
-      
+
       {{#block "content"}}{{/block}}
     </div>
 

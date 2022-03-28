@@ -33,8 +33,8 @@ exports.up = function(db) {
       type: 'string',
       length: 80
     },
-    mobile_number: {
-      type: 'int',
+    date_registered: {
+      type: 'string',
       length: 80
     }
   });
