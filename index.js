@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 // setting up session
 app.use(session({
     'store': new FileStore(),
-    'secret': 'keyboard cat',
+    'secret': process.env.SESSION_SECRET_KEY,
     'resave': false,
     'saveUninitialized': true
 }));

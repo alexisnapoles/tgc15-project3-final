@@ -15,34 +15,32 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable('users', {
+  return db.createTable('cart_items', {
     id: {
       type: 'int',
       unsigned: true,
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
-      type: 'string',
-      length: 100
+    requested_hours: {
+      type: 'int',
+      unsigned: true
     },
-    email: {
-      type: 'string', 
-      length: 320
+    service_id: {
+      type: 'int',
+      notNull: true,
+      unsigned: true
     },
-    password: {
-      type: 'string',
-      length: 80
-    },
-    date_registered: {
-      type: 'string',
-      length: 80
+    user_id: {
+      type: 'int',
+      notNull: true,
+      unsigned: true
     }
   });
 };
 
 exports.down = function(db) {
-  return db.dropTable('users');
+  return db.dropTable('cart_items');
 };
 
 exports._meta = {

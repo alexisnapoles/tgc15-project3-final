@@ -15,11 +15,22 @@ const Category = bookshelf.model('Category', {
 });
 
 const User = bookshelf.model('User', {
-    tableName: 'users'
+    tableName: 'users',
+    cartItems() {
+        return this.hasMany('CartItem');
+    }
+});
+
+const CartItem = bookshelf.model('CartItem', {
+    tableName: 'cart_items',
+    service() {
+        return this.belongsTo('Service')
+    }
 });
 
 module.exports = {
     Service,
     Category,
-    User
+    User,
+    CartItem
 };
