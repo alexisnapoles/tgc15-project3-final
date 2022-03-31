@@ -72,12 +72,14 @@ app.use((req, res, next) => {
 const landingRoutes = require('./routes/landing');
 const serviceRoutes = require('./routes/services');
 const userRoutes = require('./routes/users');
+const cartRoutes = require('./routes/cart');
 
 async function main() {
     // endpoints for routes
     app.use('/', landingRoutes);
     app.use('/services', serviceRoutes);
     app.use('/users', userRoutes);
+    app.use('/cart', cartRoutes);
 };
 main();
 

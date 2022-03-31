@@ -1,0 +1,40 @@
+{{#extends "base"}}
+  {{#block "content"}}
+
+    <h3>
+      Your Shopping Cart
+      <a href="/checkout/" class="btn btn-success">Checkout</a>
+    </h3>
+
+    {{#each CartItem}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Service Requested</th>
+            <th scope="col">Service Description</th>
+            <th scope="col">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{this.services.name}}</td>
+                <td>{{this.services.description}}</td>
+                <td>{{this.services.cost_per_hour}}</td>
+            </tr>
+        </tbody>
+      </table>
+      <form action="/cart/{{this.services.id/update}}" method="post">
+        <h6>Requested Hours: 
+            <input type="text" name="new_requested_hours" id="" value="{{this.requested_hours}}">
+            <small>{{this.services.min_hours}}</small>
+        </h6>
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}"/>
+            <input type="submit" value="Change Requested Hours" class="btn btn-primary btn-sm"/>
+      </form>
+      <div>
+        <a href="/cart/{{this.services.id}}/remove" class="btn btn-danger">Remove</a>
+      </div>
+    {{/each}}
+
+  {{/block}}
+{{/extends}}
