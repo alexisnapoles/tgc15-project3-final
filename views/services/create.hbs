@@ -2,8 +2,51 @@
   {{#block "content"}}
     <h4>Create New Service</h4>
     <form method="POST">
-        {{{form}}}
+      {{{form}}}
         <input type="submit" value="Add Service" class="btn btn-info my-3"/>
     </form>
+  {{/block}}
+
+  {{#block "js"}}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://widget.cloudinary.com/v2.0/global/all.js"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      async function generateSignature(callback, params_to_sign) { 
+        let response  = await axios.get('/cloudinary/sign', { 
+          'params': { 
+            'params_to_sign': params_to_sign 
+            } 
+          }) 
+          callback(response.data); 
+        } 
+        
+        let cloudinaryConfig = {
+          'cloudName': "{{cloudinaryName}}", 
+          'apiKey': "{{cloudinaryApiKey}}",
+          'uploadPreset':"{{cloudinaryUploadPreset}}",
+          'uploadSignature': generateSignature 
+        } 
+        
+        const myWidget = cloudinary.createUploadWidget(cloudinaryConfig, function(error, result){
+          if (!error && result && result.event == 'success') { 
+            let url = result.info.secure_url; 
+            document.querySelector('#id_image_url').value = url; 
+            document.querySelector("#uploaded-image").src = url;
+            document.querySelector("#uploaded-image").style.display="block"; 
+            } 
+          });
+      
+            document.querySelector('#upload-widget').addEventListener('click', function(){ 
+              myWidget.open(); 
+            }, false);
+    </script>
   {{/block}}
 {{/extends}}

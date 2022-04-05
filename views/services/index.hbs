@@ -14,7 +14,9 @@
       {{#each services}}
         <div class="row row-cols-2 my-5">
           <div class="col card">
-            <p>insert image</p>
+            {{#if this.image_url}}
+            <img src="{{this.image_url}}" alt="" class="img-fluid">
+            {{/if}}
           </div>
           <div class="col card">
             <div class="row">

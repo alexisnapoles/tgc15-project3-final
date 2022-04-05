@@ -57,6 +57,9 @@ const createServiceForm = (categories) => {
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
+        'image_url': fields.string({
+            widget: widgets.hidden()
+        }),
         'date_of_posting': fields.string({
             required: false,
             errorAfterField: true,

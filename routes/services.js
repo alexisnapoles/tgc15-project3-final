@@ -69,7 +69,10 @@ router.get('/create', checkAuthentication, async (req, res) => {
     const serviceForm = createServiceForm(allCategories);
 
     res.render('services/create', {
-        'form': serviceForm.toHTML(bootstrapField)
+        'form': serviceForm.toHTML(bootstrapField),
+        'cloudinaryName': process.env.CLOUDINARY_NAME,
+        'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+        'cloudinaryPreset': process.env.CLOUDINARY_PRESET
     });
 });
 

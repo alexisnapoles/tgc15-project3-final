@@ -28,6 +28,7 @@ async function createService(serviceData) {
     newService.set('min_hours', serviceData.min_hours);
     newService.set('description', serviceData.description);
     newService.set('rating', serviceData.rating);
+    newService.set('image_url', serviceData.image_url);
     newService.set('date_of_posting', serviceData.date_of_posting);
 
     await newService.save();
