@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 // setting up session
 app.use(session({
     'store': new FileStore(),
-    'secret': process.env.SESSION_SECRET_KEY,
+    'secret': process.env.TOKEN_SECRET,
     'resave': false,
     'saveUninitialized': true
 }));
@@ -50,7 +50,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(csrf());
+// app.use(csrf());
+
+const csrfInstance = csrf();
+app.use((req, res, next) => {
+    if (req.url === '/checkout/process_payment' || req.url.slice(0,5) === '/api/') {
+        return next();
+    } else {
+        csrfInstance(req, res, next);
+    }
+});
 
 app.use((err, req, res, next) => {
     if (err && err.code == "EBADCSRFTOKEN") {

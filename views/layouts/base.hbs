@@ -58,21 +58,8 @@
             <li class="nav-item col-6 col-md-auto">
               <a class="nav-link p-2 active" href="/">Home</a>
             </li>
-            <li class="nav-item dropdown col-6 col-md-auto">
-              <a
-                class="nav-link dropdown-toggle p-2"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Services
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Cleaning</a></li>
-                <li><a class="dropdown-item" href="#">Installation</a></li>
-              </ul>
+            <li class="nav-item col-6 col-md-auto">
+              <a class="nav-link p-2 active" href="/services/">Services</a>
             </li>
             <li class="nav-item col-6 col-md-auto">
               <a class="nav-link p-2" href="">Contact Us</a>
@@ -82,12 +69,18 @@
           <hr class="d-md-none text-white-50" />
 
           <div class="navbar-nav flex-row flex-wrap ms-md-auto">
-            {{#if users}}
-              Hi,
-              {{user.username}}
+             {{#if user}}
+            <div class="col-6 col-md-auto text-white">
+                <a href="/users/profile" class="btn btn-secondary d-lg-inline-block my-2 my-md-0 ms-md-3">
+                  <i class="bi bi-person-fill"></i>
+                </a>
+            </div>
               <div class="col-6 col-md-auto">
+                <a href="/cart/" class="btn btn-secondary d-lg-inline-block my-2 my-md-0 ms-md-3">
+                  <i class="bi bi-cart-fill"></i>
+                </a>
                 <a
-                  class="btn btn-success d-lg-inline-block my-2 my-md-0 ms-md-3"
+                  class="btn btn-danger btn-sm d-lg-inline-block my-2 my-md-0 ms-md-3"
                   href="/users/signout"
                 >Sign out
                 </a>
@@ -95,12 +88,12 @@
             {{else}}
               <div class="col-6 col-md-auto">
                 <a
-                  class="btn btn-primary d-lg-inline-block my-2 my-md-0 ms-md-3"
+                  class="btn btn-primary btn-sm d-lg-inline-block my-2 my-md-0 ms-md-3"
                   href="/users/signin"
                 >Sign in
                 </a>
                 <a
-                  class="btn btn-info d-lg-inline-block my-2 my-md-0 ms-md-3"
+                  class="btn btn-info btn-sm d-lg-inline-block my-2 my-md-0 ms-md-3"
                   href="/users/signup"
                 >Sign up
                 </a>
@@ -124,7 +117,7 @@
 
       {{#if error_messages}}
         {{#each error_messages}}
-          <div class="alert alert-success">
+          <div class="alert alert-danger">
             {{this}}
           </div>
         {{/each}}
@@ -139,5 +132,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+
+    {{#block 'js'}}{{/block}}
   </body>
 </html>

@@ -10,6 +10,7 @@ router.get('/', checkAuthentication, async (req, res) => {
     let userId = req.session.user.id;
     const cartServices = new CartServices(userId);
     const allCartItems = await cartServices.getAllCartItems();
+    // res.send(allCartItems);
     res.render('cart/index', {
         'cartItems': allCartItems.toJSON()
     });
@@ -28,11 +29,21 @@ router.get('/:service_id/add', checkAuthentication, async (req, res) => {
 });
 
 router.post('/:service_id/update', checkAuthentication, async (req, res) => {
-    let newRequestedHours = req.body.new_requested_hours;
-    const cartServices = new CartServices(req.session.user.id);
-    await cartServices.updateRequestedHours(req.param.service_id, newRequestedHours);
+    let newRequestedHours = req.body.newNumberOfHours;
+    let userId = req.session.user.id;
 
-    req.flash('success_messages', 'Requested number of hours has been updated');
+    const cartServices = new CartServices(userId);
+    await cartServices.updateRequestedHours(req.params.service_id, newRequestedHours);
+
+    req.flash('success_messages', 'Number of hours updated.');
+    res.redirect('/cart/');
+});
+
+router.get('/:service_id/remove', async (req, res) => {
+    let cart = new CartServices(req.session.user.id);
+    await cart.removeItem(req.params.service_id);
+
+    req.flash('success_messages', 'Item removed');
     res.redirect('/cart/');
 });
 

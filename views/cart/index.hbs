@@ -1,40 +1,31 @@
 {{#extends "base"}}
   {{#block "content"}}
-
     <h3>
       Your Shopping Cart
       <a href="/checkout/" class="btn btn-success">Checkout</a>
     </h3>
-
-    {{#each CartItem}}
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Service Requested</th>
-            <th scope="col">Service Description</th>
-            <th scope="col">Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{this.services.name}}</td>
-                <td>{{this.services.description}}</td>
-                <td>{{this.services.cost_per_hour}}</td>
-            </tr>
-        </tbody>
-      </table>
-      <form action="/cart/{{this.services.id/update}}" method="post">
-        <h6>Requested Hours: 
-            <input type="text" name="new_requested_hours" id="" value="{{this.requested_hours}}">
-            <small>{{this.services.min_hours}}</small>
-        </h6>
-            <input type="hidden" name="_csrf" value="{{../csrfToken}}"/>
-            <input type="submit" value="Change Requested Hours" class="btn btn-primary btn-sm"/>
-      </form>
-      <div>
-        <a href="/cart/{{this.services.id}}/remove" class="btn btn-danger">Remove</a>
-      </div>
-    {{/each}}
-
+    <div>
+      {{#each cartItems}}
+        <ul class="list-group">
+          <li class="list-group-item">
+            <h5>{{this.service.name}}</h5>
+            <ul>
+              <li>Cost per hour: {{this.service.cost_per_hour}}</li>
+              <li>Description: {{this.service.description}}</li>
+            </ul>
+            <form action="/cart/{{this.service.id}}/update" method="POST">
+              <h6>Requested Hours: </h6>
+                  <input type="text" name="newNumberOfHours" id="" value="{{this.requested_hours}}"> 
+                  <input type="submit" value="change" class="btn btn-primary btn-sm"/>
+                  <a href="/cart/{{this.service.id}}/remove" class="btn btn-danger btn-sm">x</a>
+                  <br>
+                  <small>Minimum required: {{this.service.min_hours}} hrs</small>
+                  <input type="hidden" name="_csrf" value="{{../csrfToken}}"/>
+            </form>
+        
+          </li>
+        </ul>
+      {{/each}}
+    </div>
   {{/block}}
 {{/extends}}

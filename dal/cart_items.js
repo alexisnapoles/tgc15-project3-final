@@ -35,10 +35,10 @@ const newCartItem = async function(userId, serviceId, requested_hours) {
     return itemInCart;
 };
 
-const updateCartItem = async function(userId, serviceId, new_rquested_hours) {
+const updateCartItem = async function(userId, serviceId, newNumberOfHours) {
     let itemInCart = await getCartItemsByUserAndService(userId, serviceId);
     if (itemInCart) {
-        itemInCart.set('requested_hours', new_rquested_hours);
+        itemInCart.set('requested_hours', newNumberOfHours);
         await itemInCart.save();
         return true;
     }
