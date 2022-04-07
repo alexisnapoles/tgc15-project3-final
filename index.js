@@ -77,12 +77,19 @@ app.use((req, res, next) => {
     next();
 });
 
-// importing the routes
+// API Routes
+const api = {
+    services: require('./routes/api/services'),
+    users: require('./routes/api/users')
+}
+
+// Browser Routes
 const landingRoutes = require('./routes/landing');
 const serviceRoutes = require('./routes/services');
 const userRoutes = require('./routes/users');
 const cloudinaryRoutes = require('./routes/cloudinary');
 const cartRoutes = require('./routes/cart');
+const checkoutRoutes = require('./routes/checkout');
 
 async function main() {
     // endpoints for routes
@@ -91,11 +98,12 @@ async function main() {
     app.use('/users', userRoutes);
     app.use('/cloudinary/', cloudinaryRoutes);
     app.use('/cart', cartRoutes);
+    app.use('/checkout', checkoutRoutes);
 };
 main();
 
-const PORT = process.env.PORT
 
-app.listen(PORT, () => {
-    console.log(`Aye! Aye! Database has commenced in the best port, i love you ${PORT}!`);
+
+app.listen(process.env.PORT, () => {
+    console.log(`Aye! Aye! Database has commenced in the best port!`);
 });
