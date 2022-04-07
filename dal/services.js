@@ -1,7 +1,14 @@
+const async = require('hbs/lib/async');
 const {
     Service,
     Category
 } = require('../models')
+
+
+async function getAllServices() {
+    let services = await Service.fetchAll();
+    return services;
+};
 
 async function getServiceById(serviceId) {
     const service = await Service.where({
@@ -36,6 +43,7 @@ async function createService(serviceData) {
 }
 
 module.exports = {
+    getAllServices,
     getServiceById,
     getAllCategories,
     createService

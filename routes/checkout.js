@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
             'name': item.related('service').get('name'),
             'amount': item.related('service').get('cost_per_hour'),
             'quantity': item.get('requested_hours'),
-            'currency': 'SGD'
+            'currency': 'PHP'
         }
         // console.log(lineItem);
         if(item.related('service').get('image_url')) {
@@ -38,8 +38,8 @@ router.get('/', async (req, res) => {
     const payment = {
         'payment_method_types': ['card'],
         'line_items': lineItems,
-        'success_url': 'https://www.google.com/',
-        'cancel_url': 'https://www.facebook.com/',
+        'success_url': process.env.STRIPE_SUCCESS_URL,
+        'cancel_url': process.env.STRIPE_ERROR_URL,
         'metadata': {
             'orders': metaData
         }
@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/success/:sessionId', (req, res) => {
-    console.log(req.params.sessionId);
+    // console.log(req.params.sessionId);
     res.render('checkout/success');
 });
 
