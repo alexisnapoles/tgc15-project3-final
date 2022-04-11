@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const wax = require('wax-on');
 const csrf = require('csurf');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -18,6 +19,8 @@ app.use(express.static('public'));
 
 wax.on(hbs.handlebars);
 wax.setLayoutPath('./views/layouts');
+
+app.use(cors());
 
 app.use(express.urlencoded({
     extended: false
