@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();
-const { User } = require('../../models');
+const { User, BlacklistedToken } = require('../../models');
 const { checkJWTAuthentication } = require('../../middlewares');
 
 const generateToken = function(user, secret, expiresIn) {
@@ -35,9 +35,11 @@ router.post('/signin', async (req, res) => {
     })
 
     if (user && user.get('password') == getHashedPassword(password)) {
-        let accessToken = generateToken(user, process.env.TOKEN_SECRET, '1h');
+        let accessToken = generateToken(user.toJSON(), process.env.TOKEN_SECRET, '15m');
+        let refreshToken = generateToken(user.toJSON(), process.env.REFRESH_TOKEN_SECRET, "1h");
         res.json({
-            'accessToken': accessToken
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
         })
     } else {
         res.statusCode = 401;
@@ -52,6 +54,64 @@ router.get('/profile', checkJWTAuthentication, (req, res) => {
         'username': req.user.username,
         'email': req.user.email
     })
+});
+
+router.post('/refresh', async (req, res) => {
+    let refreshToken = req.body.refreshToken;
+
+    if (!refreshToken) {
+        res.sendStatus(401);
+        return;
+    }
+
+    let result = await BlacklistedToken.where({
+        'token': refreshToken
+    }).fetch({
+        require: false
+    })
+
+    if (result) {
+        res.status(401);
+        res.json({
+            'message': 'Refresh token expired.'
+        });
+        return;
+    }
+
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let accessToken = generateToken(user, process.env.TOKEN_SECRET, '15m')
+            res.json({
+                'accessToken': accessToken
+            })
+        }
+    });
+});
+
+router.post('/signout', async (req, res) => {
+    let refreshToken = req.body.refreshToken;
+
+    if(!refreshToken) {
+        res.sendStatus(401);
+    } else {
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
+            if (err) {
+                res.sendStatus(403);
+                return;
+            } else {
+                const token = new BlacklistedToken();
+                token.set('token', refreshToken);
+                token.set('date_created', new Date());
+
+                await token.save();
+                res.json({
+                    'message': 'Logged out'
+                })
+            }
+        });
+    }
 });
 
 module.exports = router;
