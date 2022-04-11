@@ -80,24 +80,10 @@ const createSearchForm = function (allCategories) {
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
-        'min_hours': fields.number({
-            required: false,
-            errorAfterField: true,
-            validators: [validators.integer(), validators.min(0)]
-        }),
-        'description': fields.string({
-            required: false,
-            errorAfterField: true,
-        }),
         'rating': fields.number({
             required: false,
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
-        }),
-        'date_of_posting': fields.string({
-            required: false,
-            errorAfterField: true,
-            validators: [validators.date()]
         }),
         'category_id': fields.string({
             label: 'Category',

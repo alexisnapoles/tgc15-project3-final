@@ -99,11 +99,16 @@ async function main() {
     app.use('/cloudinary/', cloudinaryRoutes);
     app.use('/cart', cartRoutes);
     app.use('/checkout', checkoutRoutes);
+
+    // api routes
+    app.use('/api/services', express.json(), api.services);
+    app.use('/api/users', express.json(), api.users);
 };
 main();
 
 
-
-app.listen(process.env.PORT, () => {
-    console.log(`Aye! Aye! Database has commenced in the best port!`);
+// const PORT = process.env.PORT || 3000
+const PORT = 3000
+app.listen(PORT, () => {
+    console.log(`Aye! Aye! Database has commenced in the best port! I love you ${PORT}!`);
 });

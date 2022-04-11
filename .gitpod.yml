@@ -3,6 +3,8 @@ image:
 
 tasks:
  - init: . ${GITPOD_REPO_ROOT}/.vscode/init_tasks.sh
+ - init: npm install -g nodemon
+ - command: nodemon index.js
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
