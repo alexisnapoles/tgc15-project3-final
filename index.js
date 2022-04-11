@@ -110,8 +110,8 @@ async function main() {
 main();
 
 
-// const PORT = process.env.PORT || 3000
-const PORT = 3000
+const PORT = process.env.PORT || 3000
+// const PORT = 3000
 app.listen(PORT, () => {
     console.log(`Aye! Aye! Database has commenced in the best port! I love you ${PORT}!`);
 });
