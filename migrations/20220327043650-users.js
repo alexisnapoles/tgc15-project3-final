@@ -35,8 +35,7 @@ exports.up = function(db) {
       length: 80
     },
     date_registered: {
-      type: 'string',
-      length: 80
+      type: 'date'
     }
   });
 };

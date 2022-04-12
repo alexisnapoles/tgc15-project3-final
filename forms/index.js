@@ -62,7 +62,6 @@ const createServiceForm = (categories) => {
         }),
         'date_of_posting': fields.string({
             required: false,
-            errorAfterField: true,
             widget: widgets.date(),
             validators: [validators.date()]
         }),

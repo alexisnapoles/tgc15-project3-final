@@ -73,7 +73,7 @@ router.post('/refresh', async (req, res) => {
     if (result) {
         res.status(401);
         res.json({
-            'message': 'Refresh token expired.'
+            'message': 'Refresh token has expired.'
         });
         return;
     }

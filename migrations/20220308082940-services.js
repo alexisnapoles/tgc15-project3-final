@@ -44,7 +44,7 @@ exports.up = function(db) {
       type: 'decimal',
     },
     date_of_posting: {
-      type: 'datetime'
+      type: 'date'
     }
   });
 };

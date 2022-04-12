@@ -3,6 +3,10 @@
         "driver": {"ENV": "DB_DRIVER"},
         "user": {"ENV": "DB_USER"},
         "password": {"ENV": "DB_PASS"},
-        "database": {"ENV": "DB_DB"}
+        "database": {"ENV": "DB_DB"},
+        "host": {"ENV": "DB_HOST"},
+        "ssl": {
+            "rejectUnauthorized": false
+        }
     }
 }
