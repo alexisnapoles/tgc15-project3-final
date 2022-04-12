@@ -37,7 +37,7 @@ exports.up = function(db) {
       notNull: true
     },
     description: {
-      type: 'text',
+      type: 'string',
       length: 100
     },
     rating: {
